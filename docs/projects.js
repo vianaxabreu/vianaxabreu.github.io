@@ -2,8 +2,8 @@ const projects = [
   {
     title: "Attendance Tracker",
     description: "A web-based attendance system using GitHub login",
-    image: "https://image.thum.io/get/width/1000000000/crop/600/https://vianaxabreu.github.io/attendance_page/qrcode",
-    link: "https://vianaxabreu.github.io/attendance_page/qrcode"
+    image: "https://image.thum.io/get/width/1000000000/crop/600/https://vianaxabreu.github.io/attendance_page",
+    link: "https://vianaxabreu.github.io/attendance_page"
   },
 ];
 
