@@ -5,6 +5,13 @@ const projects = [
     image: "https://image.thum.io/get/width/1000000000/crop/600/https://vianaxabreu.github.io/attendance_page",
     link: "https://vianaxabreu.github.io/attendance_page/readme"
   },
+
+  {
+    title: "Greeweez Data Warehouse",
+    description: "Data modeling with dbt in BigQuery for clean analytics",
+    image: "https://image.thum.io/get/width/1000000000/crop/600/https://vianaxabreu.github.io/dbt_greenweez/",
+    link: "https://vianaxabreu.github.io/dbt_greenweez/"
+  },
 ];
 
 // Render projects
