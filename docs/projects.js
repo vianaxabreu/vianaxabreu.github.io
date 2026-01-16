@@ -1,62 +1,42 @@
-// Define o conteúdo de cada seção
+// =========================
+// SECTION CONTENTS
+// =========================
 const sections = {
   home: `
-    <h1 style="text-align:center;">Hi, I'm Alex</h1>
+    <h1 class="section-title">Hi, I'm Alex</h1>
     <p class="intro-text">
       SAP TM/SD Consultant and data professional, specialized in transforming data into practical business solutions.
       Experience in analytics, data engineering, and clear technical documentation, connecting technical teams and stakeholders.
     </p>
   `,
   projects: `
-    <h1 style="text-align:center;">Projects</h1>
+    <h1 class="section-title">Projects</h1>
     <p class="intro-text">
       Here are some of the projects I’ve worked on
     </p>
-    <div id="projects-grid">
-      <!-- Aqui você pode inserir seus cards de projetos -->
-    </div>
+    <div id="projects-grid"></div>
   `,
   contact: `
-  <h1 style="text-align:center;">Talk to me</h1>
-    <p class="intro-text" style="text-align:center;">
+    <h1 class="section-title">Talk to me</h1>
+    <p class="intro-text">
       Email: <a href="mailto:a.viana@viana-tech-consulting.de">a.viana@viana-tech-consulting.de</a><br>
       LinkedIn: <a href="https://linkedin.com/in/vianaalex" target="_blank">vianaalex</a>
     </p>
   `,
   impressum: `
-    <h1 style="text-align:center;">Impressum</h1>
-    <p class="intro-text" style="text-align:center;">
+    <h1 class="section-title">Impressum</h1>
+    <p class="intro-text">
       Alexsandro Viana<br>
-      Schöneberg, 
-      10783 Berlin, 
-      Germany<br>
+      Schöneberg, 10783 Berlin, Germany<br>
       Email: <a href="mailto:a.viana@viana-tech-consulting.de">a.viana@viana-tech-consulting.de</a><br>
       Umsatzsteuer-ID: X
     </p>
   `
 };
 
-// Função para trocar o conteúdo do main
-function showSection(name) {
-  const content = document.getElementById('content');
-  content.innerHTML = sections[name];
-
-  // Só depois de inserir no DOM, chamamos renderProjects
-  if (name === 'projects') {
-    // Pequeno delay garante que a div foi inserida
-    setTimeout(renderProjects, 0);
-  }
-}
-
-// Carrega a seção inicial (Home)
-showSection('home');
-
-
-
-
-
-
-
+// =========================
+// PROJECT DATA
+// =========================
 const projects = [
   {
     title: "Attendance Tracker",
@@ -64,23 +44,59 @@ const projects = [
     image: "https://image.thum.io/get/width/1000000000/crop/600/https://vianaxabreu.github.io/attendance_page",
     link: "https://vianaxabreu.github.io/attendance_page/readme"
   },
-
   {
     title: "Greeweez Data Warehouse",
     description: "Data modeling with dbt in BigQuery for clean analytics",
     image: "https://image.thum.io/get/width/1000000000/crop/600/https://vianaxabreu.github.io/dbt_greenweez/",
     link: "https://vianaxabreu.github.io/dbt_greenweez/"
-  },
+  }
 ];
 
-// Render projects
+// =========================
+// DOM ELEMENTS
+// =========================
+const content = document.getElementById('content');
+const hamburger = document.querySelector('.hamburger');
+const mobileOverlay = document.querySelector('.mobile-overlay');
+
+// =========================
+// MENU TOGGLE
+// =========================
+hamburger.addEventListener('click', () => {
+  mobileOverlay.classList.toggle('open');
+});
+
+mobileOverlay.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => mobileOverlay.classList.remove('open'));
+});
+
+// =========================
+// SECTION SWITCHING
+// =========================
+function showSection(name) {
+  content.innerHTML = sections[name] || '';
+  if (name === 'projects') renderProjects();
+}
+
+// Desktop menu links
+document.querySelectorAll('.navbar-left a, .navbar-right a').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    const target = link.getAttribute('href').replace('#','');
+    showSection(target);
+  });
+});
+
+// =========================
+// RENDER PROJECT CARDS
+// =========================
 function renderProjects() {
-  const grid = document.getElementById("projects-grid");
-  if (!grid) return; // garante que a div existe
-  grid.innerHTML = ""; // limpa antes de renderizar
+  const grid = document.getElementById('projects-grid');
+  if (!grid) return;
+  grid.innerHTML = '';
   projects.forEach(project => {
-    const card = document.createElement("div");
-    card.className = "project-card";
+    const card = document.createElement('div');
+    card.className = 'project-card';
     card.innerHTML = `
       <img src="${project.image}" alt="${project.title}">
       <div class="project-content">
@@ -93,4 +109,7 @@ function renderProjects() {
   });
 }
 
-
+// =========================
+// INITIAL LOAD
+// =========================
+showSection('home');
