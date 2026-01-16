@@ -84,14 +84,20 @@ function showSection(name) {
   if (name === 'projects') renderProjects();
 }
 
-// Desktop menu links
-document.querySelectorAll('.navbar-left a, .navbar-right a').forEach(link => {
+// Seleciona todos os links internos para seções
+document.querySelectorAll('a[href^="#"]').forEach(link => {
   link.addEventListener('click', e => {
     e.preventDefault();
-    const target = link.getAttribute('href').replace('#','');
+    const target = link.getAttribute('href').replace('#', '');
     showSection(target);
+
+    // Se o link estiver no mobile, fecha overlay
+    if (mobileOverlay.contains(link)) {
+      mobileOverlay.classList.remove('open');
+    }
   });
 });
+
 
 // =========================
 // RENDER PROJECT CARDS
