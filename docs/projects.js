@@ -66,8 +66,14 @@ hamburger.addEventListener('click', () => {
   mobileOverlay.classList.toggle('open');
 });
 
+// Fechar overlay e mudar seção ao clicar nos links mobile
 mobileOverlay.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => mobileOverlay.classList.remove('open'));
+  link.addEventListener('click', e => {
+    e.preventDefault(); // impede comportamento padrão
+    const target = link.getAttribute('href').replace('#',''); // pega id da seção
+    showSection(target); // muda a seção
+    mobileOverlay.classList.remove('open'); // fecha overlay
+  });
 });
 
 // =========================
